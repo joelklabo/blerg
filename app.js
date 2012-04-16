@@ -19,3 +19,5 @@ app.route('/')
 //app.route('/plaintext').text('I like text/plain')
 
 app.httpServer.listen(port)
+
+console.log('listening on port: ' + port);
