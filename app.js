@@ -3,6 +3,7 @@ var tako = require('tako')
   , path = require('path')
   , fs = require('fs')
   , app = tako()
+  , port = process.env.DEV_MODE ? 8000 : 80
   ;
 
 app.route('/static/*').files(path.join(__dirname, 'static'))
@@ -17,4 +18,4 @@ app.route('/')
 
 //app.route('/plaintext').text('I like text/plain')
 
-app.httpServer.listen(80)
+app.httpServer.listen(port)
