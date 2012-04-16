@@ -7,6 +7,10 @@ var tako = require('tako')
   ;
 
 
+app.route('/').html(function (req, res){
+  fs.createReadStream('./index.html').pipe(res)
+})
+
 // serve files
 app.route('/*').files(__dirname)
 
