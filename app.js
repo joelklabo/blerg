@@ -1,9 +1,9 @@
 var tako = require('tako')
+  , request = require('request')
   , fs = require('fs')
   , app = tako()
-  , request = require('request')
+  , config = require('./config')
   , port = process.env.DEV_MODE == 'true' ? 8000 : 80
-  , tweetUrl = 'https://twitter.com/statuses/user_timeline/16474253.json'
   ;
 
 app.route('/').html(function (req, res) {
@@ -11,7 +11,15 @@ app.route('/').html(function (req, res) {
 })
 
 app.route('/tweets.json').json(function (req, res) {
-  request(tweetUrl, function (error, response, body) {
+  request(config.tweetUrl, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.end(body)
+    }
+  })
+})
+
+app.route('/github.json').json(function (req, res) {
+  request(config.githubUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       res.end(body)
     }
