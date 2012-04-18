@@ -2,6 +2,7 @@ var tako = require('tako')
   , request = require('request')
   , fs = require('fs')
   , app = tako()
+  , ghParser = require('./gh-parser')
   , config = require('./config')
   , port = process.env.DEV_MODE == 'true' ? 8000 : 80
   ;
@@ -21,7 +22,7 @@ app.route('/tweets.json').json(function (req, res) {
 app.route('/github.json').json(function (req, res) {
   request(config.githubUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      res.end(body)
+      res.end(ghParser(body))
     }
   })
 })

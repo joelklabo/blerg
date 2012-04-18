@@ -93,7 +93,7 @@ body {
 .tweet-wrap {
 }
 
-.tweet {
+.tweet, .github {
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 5px;

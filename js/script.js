@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  
   $.ajax({
     url: "/tweets.json" 
   }).done(function (data) {
@@ -15,4 +16,22 @@ $(document).ready(function () {
     tweets = $(html.join(''))
     $('#tweets').append(tweets)
   })
+  
+  $.ajax({
+    url: "/github.json" 
+  }).done(function (data) {
+    var data = JSON.parse(data)
+      , str
+      , actions 
+      , html = []
+      ;
+
+    for (i = 0; i < data.length; i++) {
+      str = '<div class="github-wrap"><p class="github">' + data[i] + '</p></div>';
+      html.push(str)
+    }
+    actions = $(html.join(''))
+    $('#github').append(actions)
+  })
+
 })
