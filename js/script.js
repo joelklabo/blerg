@@ -27,7 +27,12 @@ $(document).ready(function () {
       ;
 
     for (i = 0; i < data.length; i++) {
-      str = '<div class="github-wrap"><p class="github">' + data[i] + '</p></div>';
+      var message = data[i].message
+        , info    = data[i].info
+        ;
+
+      str  = '<div class="github-wrap"><p class="github">' + message + '</p>'
+      if (info) str += '<p>' + info + '</p></div>' 
       html.push(str)
     }
     actions = $(html.join(''))
