@@ -18,7 +18,7 @@ function add (datum) {
 
 }
 
-function getAll () {
+function getAll (cb) {
   
   var options = {}
 
@@ -27,7 +27,7 @@ function getAll () {
   options.json   = true
   
   request(options, function (error, response, body) {
-    console.log(body) 
+    cb(body)
   }) 
 
 }
