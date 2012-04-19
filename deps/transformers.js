@@ -17,16 +17,18 @@ function Transformer (type) {
   this.type = type
   
   this.trans = function (data) {
-    var obj = {}
+    var res  = [] 
       , self = this
       ;
 
     transform(data, function (datum) {
+      var obj = {}
       obj.date = getMillis(datum.created_at)
       obj.type = self.type
       obj.data = datum
+      res.push(obj)
     })
-    return obj
+    return res 
   }
 
 }
