@@ -1,16 +1,36 @@
 var request = require('request') 
   , config  = require('./config')
   , dbUrl   = config.db 
-  , options = {}
+  , view    = '_design/all/_view/all?descending=true'
   ;
 
 function add (datum) {
-  options.url = dbUrl + datum.date
+
+  var options = {}
+
+  options.url    = dbUrl + datum.date
   options.method = 'PUT'
-  options.json = datum
+  options.json   = datum
+
   request(options, function (error, response, body) {
     console.log(body) 
   }) 
+
 }
 
-module.exports.add = add
+function getAll () {
+  
+  var options = {}
+
+  options.url    = dbUrl + view
+  options.method = 'GET'
+  options.json   = true
+  
+  request(options, function (error, response, body) {
+    console.log(body) 
+  }) 
+
+}
+
+module.exports.add    = add
+module.exports.getAll = getAll 
