@@ -69,11 +69,11 @@ module.exports = function (data) {
 
       var item    = {} 
         , message = []
-        , info  = [] 
-        , datum = data[i]
-        , actor = datum.actor.login
-        , type  = datum.type
-        , repo  = datum.repo.name
+        , info    = [] 
+        , datum   = data[i]
+        , actor   = datum.actor.login
+        , type    = datum.type
+        , repo    = datum.repo.name
         , payload = datum.payload
         ;
 

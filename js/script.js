@@ -4,14 +4,16 @@ $(document).ready(function () {
     url: "/tweets.json" 
   }).done(function (data) {
     var data = JSON.parse(data)
+      , left = '<div class="tweet-wrap">'
+      , right = '</div>'
       , str
       , tweets
       , html = []
       ;
 
     for (i = 0; i < data.length; i++) {
-      str = '<div class="tweet-wrap"><p class="tweet">' + data[i].text + '</p></div>';
-      html.push(str)
+      str = '<p>' + data[i].text + '</p>';
+      html.push(left + str + right)
     }
     tweets = $(html.join(''))
     $('#tweets').append(tweets)
@@ -21,6 +23,8 @@ $(document).ready(function () {
     url: "/github.json" 
   }).done(function (data) {
     var data = JSON.parse(data)
+      , left = '<div class="github-wrap">'
+      , right = '</div>'
       , str
       , actions 
       , html = []
@@ -31,9 +35,9 @@ $(document).ready(function () {
         , info    = data[i].info
         ;
 
-      str  = '<div class="github-wrap"><p class="github">' + message + '</p>'
+      str  = '<p>' + message + '</p>'
       if (info) str += '<p>' + info + '</p></div>' 
-      html.push(str)
+      html.push(left + str + right)
     }
     actions = $(html.join(''))
     $('#github').append(actions)

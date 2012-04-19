@@ -1,23 +1,19 @@
-* {
+body {
   font-family: 'Arvo', serif;
   font-weight: 400;
   background-color: #fffeeb;
 }
 
-body {
-  width: 60%;
-  margin: 0% 20%;
-}
-
 #main {
+  width: 70%;
+  margin: 0% 15%;
   clear: both;
-  padding: 10px 0px;
+  padding: 5px 0px;
 }
 
 #header {
-  margin: 10px 0px;
-  height: 100px;
-  border-bottom: 1px dashed #666;
+  width: 70%;
+  margin: 0px auto; 
 }
 
 #headline {
@@ -90,13 +86,16 @@ body {
   transition: transform 2s;
 }
 
-.tweet-wrap {
+.tweet-wrap, .github-wrap {
+  margin: 10px 0pxm
+  background-color: orange;
+}
+
+.tweet-wrap, .github-wrap p {
+  margin: 2px;
 }
 
 .tweet, .github {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 5px;
 }
 
 @media only screen and (max-width:895px){
