@@ -30,13 +30,11 @@ var actions = {
     , PushEvent: true 
     , WatchEvent: false
   }
-  , ghUrl = 'https://github.com/'
   ;
 
 var buildInfo = function (datum) {
 
   var commits = datum.payload.commits
-    , repo    = datum.repo.name
     , info    = []
     ;
 
@@ -44,54 +42,36 @@ var buildInfo = function (datum) {
     var commit  = commits[i]
       , message = commit.message
       , sha     = commit.sha
-      , str
+      , obj     = {}
       ;
+
+    obj.commit  = commit
+    obj.message = message
+    obj.sha     = sha
    
-    str = '<a href="' + ghUrl + repo + '/commit/' + sha + '">' + message + '</a>' 
-    info.push(str)
+    info.push(obj)
   }
 
-  return info.join(' ')
-}
-    
-var typeHasInfo = function (type) {
-  return infoTypes[type] ? true : false 
+  return info
+
 }
 
 module.exports = function (data) {
 
-  var res = [] 
-    , data = JSON.parse(data)
-    , len = data.length
+  var obj     = {} 
+    , actor   = data.actor.login
+    , type    = data.type
+    , repo    = data.repo.name
     ;
 
-    for (var i = 0; i < len; i++) {
 
-      var item    = {} 
-        , message = []
-        , info    = [] 
-        , datum   = data[i]
-        , actor   = datum.actor.login
-        , type    = datum.type
-        , repo    = datum.repo.name
-        , payload = datum.payload
-        ;
+  obj.actor = actor
+  obj.action = actions[type]
+  obj.repo = repo
+  obj.type = 'github'
+  if (type == "PushEvent") {
+    obj.info = buildInfo(data)
+  }
 
-      // Username
-      message.push('<a href="' + ghUrl + actor + '">' + actor + '</a>')
-      // Action
-      message.push(actions[type])
-      // Repo
-      message.push('<a href="https://github.com/' + repo + '">' + repo + '</a>')
-
-      // Join pieces and add to response
-      item.message = message.join(' ')
-      // Build info if it is available for this action type
-      if (typeHasInfo(type)) item.info = buildInfo(datum) 
-      // Add item to the response
-      res.push(item)
-
-    }
-
-  return JSON.stringify(res)
+  return obj
 }
