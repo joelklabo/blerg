@@ -67,7 +67,7 @@ function TwitterPreProcessor () {
 function postProcessTweet (item) {
   var obj = {}
   obj.message = item.text
-  obj.date    = item.created_at
+  obj.date    = getMillis(item.created_at)
   obj.type    = 'twitter'
   return obj
 }

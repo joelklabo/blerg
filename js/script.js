@@ -10,7 +10,6 @@ $(document).ready(function () {
       , html = []
       ;
 
-
     for (i = 0; i < data.length; i++) {
       html.push(left + data[i].type + right)
     }
