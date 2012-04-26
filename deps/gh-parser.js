@@ -1,3 +1,5 @@
+var moment = require('moment')
+
 var actions = {
       CommitCommentEvent: 'committed to'
     , CreateEvent: 'created repo'
@@ -62,14 +64,13 @@ module.exports = function (data) {
     , actor   = data.actor.login
     , type    = data.type
     , repo    = data.repo.name
-    , date    = new Date(data.created_at).getTime()
     ;
 
 
   obj.actor = actor
   obj.action = actions[type]
   obj.repo = repo
-  obj.date = date
+  obj.date = moment(data.created_at).from(moment())
   obj.type = 'github'
   if (type == "PushEvent") {
     obj.info = buildInfo(data)

@@ -23,6 +23,8 @@
  */
 
 var ghParser = require('./gh-parser')
+  , moment   = require('moment')
+  ;
 
 function PreProcessor () {
 
@@ -67,7 +69,7 @@ function TwitterPreProcessor () {
 function postProcessTweet (item) {
   var obj = {}
   obj.message = item.text
-  obj.date    = getMillis(item.created_at)
+  obj.date    = moment(item.created_at).from(moment())
   obj.type    = 'twitter'
   return obj
 }
