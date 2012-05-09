@@ -51,6 +51,9 @@ function getMillis (date) {
 }
 
 function transform (data, cb) {
+  if (typeof data == 'string'){
+    data = JSON.parse(data)
+  }
   data.forEach(function (datum) {
     cb(datum)
   })
@@ -58,19 +61,19 @@ function transform (data, cb) {
 
 function GitHubPreProcessor () {
   PreProcessor.call(this)
-  this.type = 'github'
+  this.github = true 
 }
 
 function TwitterPreProcessor () {
   PreProcessor.call(this)
-  this.type = 'twitter'
+  this.twitter = true 
 }
 
 function postProcessTweet (item) {
   var obj = {}
   obj.message = item.text
   obj.date    = moment(item.created_at).from(moment())
-  obj.type    = 'twitter'
+  obj.twitter = true 
   return obj
 }
 

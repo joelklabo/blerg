@@ -71,7 +71,7 @@ module.exports = function (data) {
   obj.action = actions[type]
   obj.repo = repo
   obj.date = moment(data.created_at).from(moment())
-  obj.type = 'github'
+  obj.github = true 
   if (type == "PushEvent") {
     obj.info = buildInfo(data)
   }

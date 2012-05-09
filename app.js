@@ -14,6 +14,8 @@ var tako        = require('tako')
   , app         = tako()
   ;
 
+app.actions = []
+
 // Instantiating GitHub Poller
 poller(config.githubUrl, tenMins, function (data) {
   ghProcess.trans(data).forEach(function (datum) {
@@ -28,17 +30,42 @@ poller(config.tweetUrl,  tenMins, function (data) {
   })
 })
 
+// Fill the actions array the first time
+updateActions()
+
+function renderPosts(finish) {
+  var page = app.page()
+  page.template('action')
+  page.promise('action')(false, {actions: app.actions})
+  page.on('finish', finish)
+  return page
+}
+
+function updateActions() {
+  db.getAll(function (data) {
+    postProcess.trans(data).forEach(function (datum){
+      app.actions.push(datum)
+    })
+  })
+}
+
 app.templates.directory(path.resolve(__dirname, 'templates'))
 
-app.route('/').html(function (req, res) {
-  fs.createReadStream('./index.html').pipe(res)
+app.route('/').json(function (req, res) {
+  //fs.createReadStream('./index.html').pipe(res)
+  function finish(data) {
+    db.getAll(function (data) {
+      return postProcess.trans(data)
+    })
+  }
+  req.pipe(renderPosts(finish)).pipe(res)
 })
  
-app.route('/actions.json').json(function (req, res) {
-  db.getAll(function (data) {
-    res.end(postProcess.trans(data))
-  })
-})
+//app.route('/actions.json').json(function (req, res) {
+//  db.getAll(function (data) {
+//    res.end(postProcess.trans(data))
+//  })
+//})
  
 // serve files
 app.route('/*').files(__dirname)

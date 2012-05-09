@@ -5,7 +5,7 @@ var request = require('request')
   ;
 
 function add (datum) {
-
+  
   var options = {}
 
   options.url    = dbUrl + datum.date
