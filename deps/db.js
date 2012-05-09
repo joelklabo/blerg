@@ -1,8 +1,15 @@
 var request = require('request') 
   , config  = require('./config')
+  , Hook    = require('hook.io').Hook
   , dbUrl   = config.db 
   , view    = '_design/all/_view/all?descending=true'
   ;
+
+var hook = new Hook({
+  name: 'db'
+})
+
+hook.start()
 
 function add (datum) {
   
@@ -15,6 +22,7 @@ function add (datum) {
   request(options, function (error, response, body) {
     if (body.error == 'conflict') { return }
     console.log('Inserting record', body) 
+    hook.emit('update')
   }) 
 
 }

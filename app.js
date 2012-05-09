@@ -2,6 +2,7 @@ var tako        = require('tako')
   , fs          = require('fs')
   , path        = require('path')
   , request     = require('request')
+  , Hook        = require('hook.io').Hook
   , db          = require('./deps/db')
   , config      = require('./deps/config')
   , processor   = require('./deps/processors')
@@ -15,6 +16,17 @@ app.actions = []
 // Fill the actions array the first time
 updateActions()
 
+var hook = new Hook({
+  name: 'app'
+})
+
+hook.on('db::update', function(data){
+  console.log('updating actions')
+  updateActions()
+})
+
+hook.start()
+
 function renderPosts(finish) {
   var page = app.page()
   page.template('action')
@@ -24,6 +36,7 @@ function renderPosts(finish) {
 }
 
 function updateActions() {
+  app.actions = []
   db.getAll(function (data) {
     postProcess.trans(data).forEach(function (datum){
       app.actions.push(datum)
