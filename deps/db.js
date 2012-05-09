@@ -14,7 +14,7 @@ function add (datum) {
 
   request(options, function (error, response, body) {
     if (body.error == 'conflict') { return }
-    console.log('Inserting record') 
+    console.log('Inserting record', body) 
   }) 
 
 }
