@@ -3,10 +3,10 @@
   <body>
   {{#each action.actions }}
     {{#if github }}
-      <h1> this be github </h1>
+      <h1> {{actor}} {{type}} {{repo}} </h1>
     {{/if}}
     {{#if twitter }}
-      <h1> this be twitter </h1>
+      <h1> {{message}} </h1>
     {{/if}}
   {{/each}}
   </body>
