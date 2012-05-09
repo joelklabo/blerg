@@ -5,8 +5,6 @@ var tako        = require('tako')
   , db          = require('./deps/db')
   , config      = require('./deps/config')
   , processor   = require('./deps/processors')
-  , ghProcess   = new processor.GitHubPreProcessor()
-  , twProcess   = new processor.TwitterPreProcessor()
   , postProcess = new processor.PostProcessor()
   , port        = process.env.DEV_MODE == 'true' ? 8000 : 80
   , app         = tako()
@@ -35,7 +33,7 @@ function updateActions() {
 
 app.templates.directory(path.resolve(__dirname, 'templates'))
 
-app.route('/').json(function (req, res) {
+app.route('/').html(function (req, res) {
   function finish(data) {
     db.getAll(function (data) {
       return postProcess.trans(data)

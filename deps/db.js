@@ -13,7 +13,8 @@ function add (datum) {
   options.json   = datum
 
   request(options, function (error, response, body) {
-    console.log(body) 
+    if (body.error == 'conflict') { return }
+    console.log('Inserting record') 
   }) 
 
 }

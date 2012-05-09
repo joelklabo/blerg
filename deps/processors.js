@@ -62,11 +62,13 @@ function transform (data, cb) {
 function GitHubPreProcessor () {
   PreProcessor.call(this)
   this.github = true 
+  this.type = 'github'
 }
 
 function TwitterPreProcessor () {
   PreProcessor.call(this)
   this.twitter = true 
+  this.type = 'twitter'
 }
 
 function postProcessTweet (item) {
@@ -102,7 +104,7 @@ function PostProcessor () {
           res.push(postProcessGithub(item))
           break;
         default:
-          console.log('action type does not match')
+          console.log('Action item TypeError')
       }
 
     })
