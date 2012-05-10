@@ -1,6 +1,7 @@
 var Hook = require('hook.io').Hook
   , fs   = require('fs')
   , config = require('./deps/config')
+  , write  = fs.createWriteStream
   ;
 
 var hook = new Hook({
@@ -14,6 +15,8 @@ hook.on('*::log', function(data){
 })
 
 function log (message){
-  message = new Date() + ': ' + message
+  var logFile = write(config.logFile, {flags: 'a'})
+  message = new Date() + ': ' + message + '\n'
+  logFile.end(message)
   console.log(message)
 }
