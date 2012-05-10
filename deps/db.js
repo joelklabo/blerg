@@ -22,6 +22,7 @@ function add (datum) {
   request(options, function (error, response, body) {
     if (body.error == 'conflict') { return }
     console.log('Inserting record', body) 
+    hook.emit('log', {message: 'inserting record'})
     hook.emit('update')
   }) 
 
