@@ -21,7 +21,7 @@ var hook = new Hook({
 })
 
 hook.on('db::update', function(data){
-  console.log('updating actions')
+  hook.emit('log', {message: 'updating actions'})
   updateActions()
 })
 
