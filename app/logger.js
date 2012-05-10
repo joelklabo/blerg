@@ -18,5 +18,4 @@ function log (message){
   var logFile = write(config.logFile, {flags: 'a'})
   message = new Date() + ': ' + message + '\n'
   logFile.end(message)
-  console.log(message)
 }
