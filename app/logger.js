@@ -1,6 +1,6 @@
 var Hook = require('hook.io').Hook
   , fs   = require('fs')
-  , config = require('./deps/config')
+  , config = require('../deps/config')
   , write  = fs.createWriteStream
   ;
 

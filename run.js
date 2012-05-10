@@ -8,9 +8,9 @@ var hook = new Hook({
 
 hook.start()
 
-var app = new (forever.Monitor)('app.js', {})
-var server = new (forever.Monitor)('server.js', {})
-var log = new (forever.Monitor)('logger.js', {})
+var app = new (forever.Monitor)('./app/app.js', {})
+var server = new (forever.Monitor)('./app/server.js', {})
+var log = new (forever.Monitor)('./app/logger.js', {})
 
 app.on('exit', function(){
   hook.emit('log', {message: 'app exited'})

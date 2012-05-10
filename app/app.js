@@ -3,9 +3,9 @@ var tako        = require('tako')
   , path        = require('path')
   , request     = require('request')
   , Hook        = require('hook.io').Hook
-  , db          = require('./deps/db')
-  , config      = require('./deps/config')
-  , processor   = require('./deps/processors')
+  , db          = require('../deps/db')
+  , config      = require('../deps/config')
+  , processor   = require('../deps/processors')
   , postProcess = new processor.PostProcessor()
   , port        = process.env.DEV_MODE == 'true' ? 8000 : 80
   , app         = tako()
@@ -44,7 +44,7 @@ function updateActions() {
   })
 }
 
-app.templates.directory(path.resolve(__dirname, 'templates'))
+app.templates.directory(path.resolve(__dirname, '../templates'))
 
 app.route('/').html(function (req, res) {
   function finish(data) {
