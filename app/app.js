@@ -20,14 +20,14 @@ var hook = new Hook({
   name: 'app'
 })
 
-hook.on('db::update', function(data){
+hook.on('db::update', function (data) {
   hook.emit('log', {message: 'updating actions'})
   updateActions()
 })
 
 hook.start()
 
-function renderPosts(finish) {
+function renderPosts (finish) {
   var page = app.page()
   page.template('action')
   page.promise('action')(false, {actions: app.actions})
@@ -35,7 +35,7 @@ function renderPosts(finish) {
   return page
 }
 
-function updateActions() {
+function updateActions () {
   app.actions = []
   db.getAll(function (data) {
     postProcess.trans(data).forEach(function (datum){
@@ -60,4 +60,4 @@ app.route('/*').files(__dirname)
  
 app.httpServer.listen(port)
 
-console.log('listening on port: ' + port)
+hook.emit('log', {message: 'server started on port ' + port})
