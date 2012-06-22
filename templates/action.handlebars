@@ -1,13 +1,25 @@
-<html>
-  <head><title>Hey you!</title></head>
-  <body>
-  {{#each action.actions }}
-    {{#if github }}
-      <h1> {{actor}} {{action}} {{repo}} </h1>
-    {{/if}}
-    {{#if twitter }}
-      <h1> {{message}} </h1>
-    {{/if}}
-  {{/each}}
-  </body>
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Joels Blegh</title> 
+
+</head>
+<body> 
+  <div id="container">
+    <div class="header">
+    </div>
+
+    {{#each action.actions }}
+      {{#if github }}
+        <h1> {{actor}} {{action}} {{repo}} </h1>
+      {{/if}}
+      {{#if twitter }}
+        <h1> {{message}} </h1>
+      {{/if}}
+    {{/each}}
+
+  </div>  
+  
+</body> 
 </html>
