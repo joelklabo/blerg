@@ -11,7 +11,7 @@ var actions = {
     , GistEvent: 'created a gist'
     , GollumEvent: 'gollumed'
     , IssueCommentEvent: 'commented on'
-    , IssuesEvent: 'updated and issue'
+    , IssuesEvent: 'updated an issue on'
     , PullRequestEvent: 'submitted a pull request to'
     , PushEvent: 'pushed to'
     , WatchEvent: 'started watching'
