@@ -1,10 +1,9 @@
 var db          = require('../deps/db')
   , poller      = require('../deps/poller')
   , config      = require('../deps/config')
-  , processor   = require('../deps/processors')
+  , processor   = require('../deps/pre-process')
   , ghProcess   = new processor.GitHubPreProcessor()
   , twProcess   = new processor.TwitterPreProcessor()
-  , postProcess = new processor.PostProcessor()
   , tenMins     = 60 * 1000 * 10
   ;
 

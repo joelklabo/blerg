@@ -5,7 +5,7 @@ var tako        = require('tako')
   , Hook        = require('hook.io').Hook
   , db          = require('../deps/db')
   , config      = require('../deps/config')
-  , processor   = require('../deps/processors')
+  , processor   = require('../deps/post-process')
   , postProcess = new processor.PostProcessor()
   , port        = process.env.DEV_MODE == 'true' ? 8000 : 80
   , app         = tako()
