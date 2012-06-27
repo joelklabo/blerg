@@ -10,5 +10,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/joelklabo/blerg.git"
+  },
+  "dependencies": {
+    "couch": "*",
+    "daemon": "*",
+    "forever": "*",
+    "hook.io": "*",
+    "moment": "*",
+    "request": "*",
+    "tako": "*"
   }
 }
