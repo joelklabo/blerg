@@ -93,6 +93,8 @@ module.exports = function (data) {
     o.repo = 'Gist'
   } else if (type == "PushEvent") {
     o.commits = buildInfo(data)
+    o.itemLink = buildRepoLink(repo)
+    o.repo = repo
   } else {
     o.itemLink = buildRepoLink(repo)
     o.repo = repo
