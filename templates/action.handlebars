@@ -13,6 +13,9 @@
     {{#each action.actions }}
       {{#if github }}
         <h1> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ itemLink }}">{{repo}}</a> </h1>
+        {{#each commits }}
+          <a href="{{ commitLink  }}">commit</a>
+        {{/each}}
       {{/if}}
       {{#if twitter }}
         <h1> {{message}} </h1>

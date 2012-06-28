@@ -42,6 +42,10 @@ var buildGistLink = function (gist) {
   return 'https://gist.github.com/' + gist 
 }
 
+var buildCommitLink = function (repo, sha) {
+  return 'https://github.com/' + repo + '/commit/' + sha
+}
+
 var getActorLink = function () {
   return 'https://github.com/joelklabo/' 
 }
@@ -49,6 +53,7 @@ var getActorLink = function () {
 var buildInfo = function (datum) {
 
   var commits = datum.payload.commits
+    , repo    = datum.repo.name
     , info    = []
     ;
 
@@ -56,14 +61,15 @@ var buildInfo = function (datum) {
     var commit  = commits[i]
       , message = commit.message
       , sha     = commit.sha
-      , obj     = {}
+      , o       = {}
       ;
 
-    obj.commit  = commit
-    obj.message = message
-    obj.sha     = sha
+    o.commit  = commit
+    o.message = message
+    o.sha     = sha
+    o.commitLink = buildCommitLink(repo, sha)
    
-    info.push(obj)
+    info.push(o)
   }
 
   return info
@@ -82,9 +88,11 @@ module.exports = function (data) {
   o.actor = actor
   o.actorLink = getActorLink()
   o.action = actions[type]
-  if (type == "GistEvent") {
+  if        (type == "GistEvent") {
     o.itemLink = buildGistLink(data.payload.gist.id)
-    o.repo = '[gist]'
+    o.repo = 'Gist'
+  } else if (type == "PushEvent") {
+    o.commits = buildInfo(data)
   } else {
     o.itemLink = buildRepoLink(repo)
     o.repo = repo
@@ -92,9 +100,6 @@ module.exports = function (data) {
   o.date = moment(data.created_at).from(moment())
   o.github = true 
   o.type = 'github'
-  //if (type == "PushEvent") {
-  //  obj.info = buildInfo(data)
-  //}
 
   return o
 }
