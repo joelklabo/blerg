@@ -38,6 +38,10 @@ var buildRepoLink = function (repo) {
   return 'https://github.com/' + repo 
 }
 
+var buildGistLink = function (gist) {
+  return 'https://gist.github.com/' + gist 
+}
+
 var getActorLink = function () {
   return 'https://github.com/joelklabo/' 
 }
@@ -78,8 +82,13 @@ module.exports = function (data) {
   o.actor = actor
   o.actorLink = getActorLink()
   o.action = actions[type]
-  o.repo = repo
-  o.repoLink = buildRepoLink(repo)
+  if (type == "GistEvent") {
+    o.itemLink = buildGistLink(data.payload.gist.id)
+    o.repo = '[gist]'
+  } else {
+    o.itemLink = buildRepoLink(repo)
+    o.repo = repo
+  }
   o.date = moment(data.created_at).from(moment())
   o.github = true 
   o.type = 'github'
