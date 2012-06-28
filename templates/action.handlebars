@@ -12,7 +12,7 @@
 
     {{#each action.actions }}
       {{#if github }}
-        <h1> {{actor}} {{action}} {{repo}} </h1>
+        <h1> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ repoLink }}">{{repo}}</a> </h1>
       {{/if}}
       {{#if twitter }}
         <h1> {{message}} </h1>

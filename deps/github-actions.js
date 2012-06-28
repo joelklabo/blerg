@@ -34,6 +34,14 @@ var actions = {
   }
   ;
 
+var buildRepoLink = function (repo) {
+  return 'https://github.com/' + repo 
+}
+
+var getActorLink = function () {
+  return 'https://github.com/joelklabo/' 
+}
+
 var buildInfo = function (datum) {
 
   var commits = datum.payload.commits
@@ -60,22 +68,24 @@ var buildInfo = function (datum) {
 
 module.exports = function (data) {
 
-  var obj     = {} 
+  var o       = {} 
     , actor   = data.actor.login
     , type    = data.type
     , repo    = data.repo.name
     ;
 
 
-  obj.actor = actor
-  obj.action = actions[type]
-  obj.repo = repo
-  obj.date = moment(data.created_at).from(moment())
-  obj.github = true 
-  obj.type = 'github'
-  if (type == "PushEvent") {
-    obj.info = buildInfo(data)
-  }
+  o.actor = actor
+  o.actorLink = getActorLink()
+  o.action = actions[type]
+  o.repo = repo
+  o.repoLink = buildRepoLink(repo)
+  o.date = moment(data.created_at).from(moment())
+  o.github = true 
+  o.type = 'github'
+  //if (type == "PushEvent") {
+  //  obj.info = buildInfo(data)
+  //}
 
-  return obj
+  return o
 }
