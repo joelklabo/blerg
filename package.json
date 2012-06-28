@@ -19,5 +19,9 @@
     "moment": "*",
     "request": "*",
     "tako": "*"
+  },
+  "engine": {
+    "node": "0.6.*"
   }
+
 }
