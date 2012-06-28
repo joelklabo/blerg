@@ -8,7 +8,7 @@ var actions = {
     , FollowEvent: 'followed'
     , ForkEvent: 'forked'
     , ForkApplyEvent: 'applied fork to'
-    , GistEvent: 'created a gist'
+    , GistEvent: 'created a'
     , GollumEvent: 'gollumed'
     , IssueCommentEvent: 'commented on'
     , IssuesEvent: 'updated an issue on'
