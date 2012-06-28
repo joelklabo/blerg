@@ -20,6 +20,15 @@ function postProcessGithub (item) {
   return ghParser(item)
 }
 
+function transform (data, cb) {
+  if (typeof data == 'string'){
+    data = JSON.parse(data)
+  }
+  data.forEach(function (datum) {
+    cb(datum)
+  })
+}
+
 function PostProcessor () {
   
   this.trans = function (data) {
