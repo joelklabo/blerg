@@ -12,7 +12,7 @@
  *
  */
 
-var ghParser = require('./gh-parser')
+var ghParser = require('./github-actions')
   , moment   = require('moment')
   ;
 
