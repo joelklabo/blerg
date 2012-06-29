@@ -88,7 +88,7 @@ module.exports = function (data) {
   o.actor = actor
   o.actorLink = getActorLink()
   o.action = actions[type]
-  if        (type == "GistEvent") {
+  if (type == "GistEvent") {
     o.itemLink = buildGistLink(data.payload.gist.id)
     o.repo = 'Gist'
   } else if (type == "PushEvent") {
