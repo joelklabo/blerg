@@ -18,7 +18,8 @@
     "hook.io": "*",
     "moment": "*",
     "request": "*",
-    "tako": "*"
+    "tako": "*",
+    "effortless": "*"
   },
   "engine": {
     "node": "0.6.*"
