@@ -56,8 +56,8 @@ app.route('/').html(function (req, res) {
 })
  
 // serve files
-app.route('/*').files(__dirname)
- 
+app.route('/*').files(path.resolve(__dirname, '../public/'))
+
 app.httpServer.listen(port)
 
 hook.emit('log', {message: 'server started on port ' + port})
