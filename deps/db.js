@@ -2,7 +2,7 @@ var request = require('request')
   , config  = require('./config')
   , Hook    = require('hook.io').Hook
   , dbUrl   = config.db 
-  , view    = '_design/all/_view/all?descending=true'
+  , view    = '_design/all/_view/all?descending=true&limit=30'
   ;
 
 var hook = new Hook({

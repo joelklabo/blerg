@@ -3,26 +3,43 @@
 <head> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Joels Blegh</title> 
+  <link href="/css/reset.css" rel="stylesheet" charset="utf-8">
   <link href="/css/main.css" rel="stylesheet" charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 
 </head>
 <body> 
   <div id="container">
     <div class="header">
+      <h1 class="headline">Joel Klabo</h1>
+      <h3 class="footline">thing person.</h1>
     </div>
+    <div class="content">
 
     {{#each action.actions }}
       {{#if github }}
-        <h1> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ itemLink }}">{{repo}}</a> </h1>
-        {{#each commits }}
-          <a href="{{ commitLink  }}">commit</a>
-        {{/each}}
+      <div class="item github">
+          <div class="message-content">
+            <img class="avatar" src="/images/github.png">
+            <p class="message"> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ itemLink }}">{{repo}}</a> </p>
+          </div>
+      </div>
       {{/if}}
       {{#if twitter }}
-        <h1> {{message}} </h1>
+      <div class="item twitter">
+          <div class="message-content">
+            <img class="avatar" src="/images/twitter.png">
+            <p class="message"> {{message}} </p>
+          </div>
+      </div>
       {{/if}}
     {{/each}}
 
+    </div>
+    <div class="footer">
+      <h3 class="footline">Made by <a href="https://twitter.com/joelklabo">@joelklabo</a></h1>
+    </div>
   </div>  
   
 </body> 
