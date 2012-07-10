@@ -4,9 +4,10 @@ body{background-color:#06799f;}
 .footer{height:100px;line-height:100px;font-family:'Open Sans',sans-serif;}
 .headline{font-size:65px;font-weight:bold;}
 .footline{color:#ffd673;font-size:25px;font-style:italic;}
-.content{border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;padding:7px 25px 25px 25px;background-color:white;}
+.content{background-color:white;}
 .twitter,.github{font-size:30px;font-family:'Vollkorn',serif;padding:15px;border-bottom:#ffd673 1px dotted;}
 .item{position:relative;}
+.item:hover{background-color:#ffd673;cursor:pointer;}
 .message-content{margin-left:48px;}
 .message-content .avatar{position:absolute;top:6px;left:0px;}
 .avatar{width:48px;height:48px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}

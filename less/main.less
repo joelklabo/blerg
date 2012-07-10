@@ -43,8 +43,6 @@ body {
 }
 
 .content {
-  .rounded-corners(10px);
-  padding: 7px 25px 25px 25px;
   background-color: white;
 }
 
@@ -57,6 +55,11 @@ body {
 
 .item {
   position: relative;
+}
+
+.item:hover {
+  background-color: @yellow;
+  cursor: pointer;
 }
 
 .message-content {

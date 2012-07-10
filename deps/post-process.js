@@ -13,6 +13,7 @@ function postProcessTweet (item) {
   obj.message = item.text
   obj.date    = moment(item.created_at).from(moment())
   obj.twitter = true 
+  obj.id      = item.id_str
   return obj
 }
 
