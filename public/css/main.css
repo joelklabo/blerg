@@ -12,3 +12,5 @@ body{background-color:#06799f;}
 .message-content .avatar{position:absolute;top:6px;left:0px;}
 .avatar{width:48px;height:48px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
 a{text-decoration:none;}
+.commits{font-size:15px;}
+.commits li{padding-top:7px;}

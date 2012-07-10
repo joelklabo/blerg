@@ -25,7 +25,15 @@
           <div class="message-content">
             <img class="avatar" src="/images/github.png">
             <p class="message"> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ itemLink }}">{{repo}}</a> </p>
+            {{#if commits }}
+              <ul class="commits" style="display:none;">
+                {{#each commits}}
+                  <li><p class="commit"><a href="{{ commitLink }}">{{ sha }}</a> {{ message }}</p></li>
+                {{/each}}
+              </ul>
+            {{/if}}
           </div>
+          
       </div>
       {{/if}}
       {{#if twitter }}
