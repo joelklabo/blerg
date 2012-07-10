@@ -4,4 +4,7 @@ $(function () {
       , url = 'https://twitter.com/joelklabo/status/' + id; 
     window.location.replace(url) 
   })
+  $('.item a').click(function (e) {
+    e.stopPropagation()
+  })
 })

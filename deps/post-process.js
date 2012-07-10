@@ -9,12 +9,22 @@ var ghParser = require('./github-actions')
   ;
 
 function postProcessTweet (item) {
-  var obj = {}
-  obj.message = item.text
+  var obj = {}, text = item.text;
+  obj.message = processTweetLinks(text)
   obj.date    = moment(item.created_at).from(moment())
   obj.twitter = true 
   obj.id      = item.id_str
   return obj
+}
+
+function processTweetLinks (text) {
+  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+  text = text.replace(exp, "<a href='$1'>$1</a>");
+  exp = /(^|\s)#(\w+)/g;
+  text = text.replace(exp, "$1<a href='http://search.twitter.com/search?q=%23$2' target='_blank'>#$2</a>");
+  exp = /(^|\s)@(\w+)/g;
+  text = text.replace(exp, "$1<a href='http://www.twitter.com/$2' target='_blank'>@$2</a>");
+  return text;
 }
 
 function postProcessGithub (item) {
