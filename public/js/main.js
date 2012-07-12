@@ -14,4 +14,9 @@ $(function () {
   $('.item a').click(function (e) {
     e.stopPropagation()
   })
+  $('.header').hover(function (e) {
+    $('.twitter-follow-button').fadeIn();
+  }, function (e) {
+    $('.twitter-follow-button').fadeOut();
+  });
 })
