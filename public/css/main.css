@@ -1,16 +1,18 @@
-body{background-color:#06799f;}
+body{background-color:#06799f;color:#333333;}
 #container{width:960px;margin:auto;}
 .header{color:white;text-align:right;font-family:'Open Sans',sans-serif;padding:35px;}
 .footer{height:100px;line-height:100px;font-family:'Open Sans',sans-serif;}
 .headline{font-size:65px;font-weight:bold;}
-.footline{color:#ffd673;font-size:25px;font-style:italic;}
+.footline{color:white;font-size:25px;font-style:italic;}
 .content{background-color:white;}
 .twitter,.github{font-size:30px;font-family:'Vollkorn',serif;padding:15px;border-bottom:#ffd673 1px dotted;}
 .item{position:relative;}
-.item:hover{background-color:#ffd673;cursor:pointer;}
+.item:hover{cursor:pointer;background-color:#fff4d9;}
+.message{margin-right:55px;}
 .message-content{margin-left:48px;}
-.message-content .avatar{position:absolute;top:6px;left:0px;}
-.avatar{width:48px;height:48px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+.message-content .avatar{position:absolute;top:6px;left:8px;}
+.message-content .timestamp{position:absolute;top:12px;right:12px;font-size:15px;}
+.avatar{width:48px;height:48px;}
 a{text-decoration:none;}
 .commits{font-size:15px;}
-.commits li{padding-top:7px;}
+.commits li{margin-top:5px;padding:5px 2px 2px 2px;}

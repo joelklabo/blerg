@@ -1,7 +1,7 @@
 @bgblue: #06799F;
 @yellow: #FFD673;
+@black: #333;
 @base-url: "/images";
-
 
 .rounded-corners (@radius: 5px) {
   border-radius: @radius;
@@ -11,6 +11,7 @@
 
 body {
   background-color: @bgblue;
+  color: @black;
 }
 
 #container {
@@ -37,7 +38,7 @@ body {
 }
 
 .footline {
-  color: @yellow;
+  color: white;
   font-size: 25px;
   font-style: italic;
 }
@@ -58,8 +59,12 @@ body {
 }
 
 .item:hover {
-  background-color: @yellow;
   cursor: pointer;
+  background-color: lighten(@yellow, 20%);
+}
+
+.message {
+  margin-right: 55px;
 }
 
 .message-content {
@@ -69,13 +74,19 @@ body {
 .message-content .avatar {
   position: absolute;
   top: 6px;
-  left: 0px;
+  left: 8px;
+}
+
+.message-content .timestamp {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 15px;
 }
 
 .avatar {
   width: 48px;
   height: 48px;
-  .rounded-corners;
 }
 
 a {
@@ -87,5 +98,6 @@ a {
 }
 
 .commits li {
-  padding-top: 7px;
+  margin-top: 5px;
+  padding: 5px 2px 2px 2px;
 }

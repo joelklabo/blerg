@@ -24,6 +24,7 @@
       <div class="item github">
           <div class="message-content">
             <img class="avatar" src="/images/github.png">
+            <p class="timestamp">{{ date }}</p>
             <p class="message"> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ itemLink }}">{{repo}}</a> </p>
             {{#if commits }}
               <ul class="commits" style="display:none;">
@@ -40,6 +41,7 @@
       <div class="item twitter" data-tweet-id="{{ id }}">
           <div class="message-content">
             <img class="avatar" src="/images/twitter.png">
+            <p class="timestamp">{{ date }}</p>
             <p class="message"> {{{message}}} </p>
           </div>
       </div>
