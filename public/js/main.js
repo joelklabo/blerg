@@ -6,10 +6,10 @@ $(function () {
   })
   $('.github').hover(function () {
     var $list = $(this).find('ul');
-    $list.fadeIn('slow');
+    $list.fadeIn();
   }, function () {
     var $list = $(this).find('ul');
-    $list.fadeOut('slow');
+    $list.fadeOut();
   })
   $('.item a').click(function (e) {
     e.stopPropagation()

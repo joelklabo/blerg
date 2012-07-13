@@ -4,16 +4,16 @@ body{background-color:#06799f;color:#333333;}
 .twitter-follow-button{position:absolute;top:65px;left:35px;}
 .footer{height:100px;line-height:100px;font-family:'Open Sans',sans-serif;}
 .headline{font-size:65px;font-weight:bold;}
-.footline{color:white;font-size:25px;font-style:italic;}
-.content{background-color:white;}
-.twitter,.github{font-size:30px;font-family:'Vollkorn',serif;padding:15px;border-bottom:#ffd673 1px dotted;}
+.footline{color:#ffd673;font-size:25px;font-style:italic;}
+.content{background-color:white;margin-bottom:80px;}
+.twitter,.github{font-size:26px;line-height:30px;font-family:'Vollkorn',serif;padding:15px;border-bottom:#ffd673 1px dotted;}
 .item{position:relative;}
 .item:hover{cursor:pointer;background-color:#fff4d9;}
-.message{margin-right:55px;}
+.message{margin-right:75px;}
 .message-content{margin-left:48px;}
 .message-content .avatar{position:absolute;top:6px;left:8px;}
 .message-content .timestamp{position:absolute;top:12px;right:12px;font-size:15px;}
 .avatar{width:48px;height:48px;}
 a{text-decoration:none;}
 .commits{font-size:15px;}
-.commits li{margin-top:5px;padding:5px 2px 2px 2px;}
+.commits li{margin-top:5px;padding:5px 2px 0px 2px;}
