@@ -39,7 +39,9 @@ function updateActions () {
   app.actions = []
   db.getAll(function (data) {
     postProcess.trans(data).forEach(function (datum){
-      app.actions.push(datum)
+      if (app.actions.length < 30) {
+        app.actions.push(datum)
+      }
     })
   })
 }
