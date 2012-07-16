@@ -99,6 +99,7 @@ module.exports = function (data) {
     o.itemLink = buildRepoLink(repo)
     o.repo = repo
   }
+  o.created_at = data.created_at
   o.date = moment(data.created_at).from(moment())
   o.github = true 
   o.type = 'github'

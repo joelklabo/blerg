@@ -11,7 +11,8 @@ var ghParser = require('./github-actions')
 function postProcessTweet (item) {
   var obj = {}, text = item.text;
   obj.message = processTweetLinks(text)
-  obj.date    = moment(item.created_at).from(moment())
+  obj.created_at = item.created_at
+  obj.date = moment(item.created_at).from(moment())
   obj.twitter = true 
   obj.id      = item.id_str
   return obj

@@ -3,11 +3,13 @@ var tako        = require('tako')
   , path        = require('path')
   , request     = require('request')
   , Hook        = require('hook.io').Hook
+  , moment      = require('moment')
   , db          = require('../deps/db')
   , config      = require('../deps/config')
   , processor   = require('../deps/post-process')
   , postProcess = new processor.PostProcessor()
   , port        = process.env.DEV_MODE == 'true' ? 8000 : 80
+  , fifteenMins = 60 * 1000 * 15
   , app         = tako()
   ;
 
@@ -35,6 +37,13 @@ function renderPosts (finish) {
   return page
 }
 
+function updateTimes () {
+  hook.emit('log', {message: 'updating times'})
+  app.actions.forEach(function (action) {
+    action.date = moment(action.created_at).from(moment())
+  })
+}
+
 function updateActions () {
   app.actions = []
   db.getAll(function (data) {
@@ -45,6 +54,10 @@ function updateActions () {
     })
   })
 }
+
+setInterval(function () {
+  updateTimes()
+}, fifteenMins)
 
 app.templates.directory(path.resolve(__dirname, '../templates'))
 
