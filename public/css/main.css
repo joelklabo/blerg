@@ -15,5 +15,6 @@ body{background-color:#06799f;background:url('../images/bg-texture.png') repeat 
 .message-content .timestamp{position:absolute;top:12px;right:12px;font-size:15px;}
 .avatar{width:48px;height:48px;}
 a{text-decoration:none;}
+.see-commits{margin-left:15px;}
 .commits{font-size:15px;}
 .commits li{margin-top:5px;padding:5px 2px 0px 2px;}

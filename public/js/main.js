@@ -4,12 +4,14 @@ $(function () {
       , url = 'https://twitter.com/joelklabo/status/' + id; 
     window.location.replace(url) 
   })
+  $('.see-commits').click(function (e) {
+    var $list = $(this).parents().find('.commits').first();
+    $list.toggle('slideDown')
+  })
   $('.github').hover(function () {
-    var $list = $(this).find('ul');
-    $list.fadeIn();
+    $(this).find('.see-commits').show()
   }, function () {
-    var $list = $(this).find('ul');
-    $list.fadeOut();
+    $(this).find('.see-commits').hide()
   })
   $('.item a').click(function (e) {
     e.stopPropagation()
