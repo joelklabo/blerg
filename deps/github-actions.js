@@ -95,6 +95,9 @@ module.exports = function (data) {
     o.commits = buildInfo(data)
     o.itemLink = buildRepoLink(repo)
     o.repo = repo
+  } else if (type == "FollowEvent" && repo == "/") {
+    o.itemLink = data.payload.target.html_url 
+    o.repo = data.payload.target.name
   } else {
     o.itemLink = buildRepoLink(repo)
     o.repo = repo
