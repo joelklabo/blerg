@@ -20,6 +20,7 @@
     "request": "*",
     "tako": "*",
     "effortless": "*",
+    "underscore": "*",
     "forever-monitor": "~1.0.2"
   },
   "engine": {

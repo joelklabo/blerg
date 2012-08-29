@@ -1,5 +1,6 @@
 var tako        = require('tako')
   , fs          = require('fs')
+  , _           = require('underscore')
   , path        = require('path')
   , request     = require('request')
   , Hook        = require('hook.io').Hook
@@ -8,7 +9,7 @@ var tako        = require('tako')
   , config      = require('../deps/config')
   , processor   = require('../deps/post-process')
   , postProcess = new processor.PostProcessor()
-  , port        = process.env.DEV_MODE == 'true' ? 8000 : 80
+  , port        = 8000//process.env.DEV_MODE == 'true' ? 8000 : 80
   , fifteenMins = 60 * 1000 * 15
   , app         = tako()
   ;
@@ -60,6 +61,15 @@ setInterval(function () {
 }, fifteenMins)
 
 app.templates.directory(path.resolve(__dirname, '../templates'))
+
+app.route('/actions.json').json(function (req, res) {
+  db.getAll(function (data) {
+    var json = _.map(data.rows, function (row) {
+      return row.value
+    })
+    res.end(json)
+  })
+})
 
 app.route('/').html(function (req, res) {
   function finish(data) {
