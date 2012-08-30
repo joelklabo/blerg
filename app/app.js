@@ -60,7 +60,7 @@ setInterval(function () {
   updateTimes()
 }, fifteenMins)
 
-app.templates.directory(path.resolve(__dirname, '../templates'))
+app.templates.directory(path.resolve(__dirname, '../templates/'))
 
 app.route('/actions.json').json(function (req, res) {
   db.getAll(function (data) {

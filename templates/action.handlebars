@@ -9,6 +9,7 @@
   <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
   <link rel="icon" type="image/ico" href="/images/plus.gif"/>
   <script src="/js/jquery-1.7.2.min.js"></script>
+  <script src="/js/backbone.js"></script>
   <script src="/js/main.js"></script>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
@@ -23,36 +24,6 @@
     </div>
     <div class="content">
 
-    {{#each action.actions }}
-      {{#if github }}
-      <div class="item github">
-          <div class="message-content">
-            <img class="avatar" src="/images/github.png">
-            <p class="timestamp">{{ date }}</p>
-            <p class="message"> <a href="{{ actorLink }}">{{actor}}</a> {{action}} <a href="{{ itemLink }}">{{repo}}</a>
-            {{#if commits }}
-              <span class="see-commits" style="display:none;"> &plusmn; </span>
-              <ul class="commits" style="display:none;">
-                {{#each commits}}
-                  <li><p class="commit"><a href="{{ commitLink }}">{{ sha }}</a> {{ message }}</p></li>
-                {{/each}}
-              </ul>
-            {{/if}}
-            </p>
-          </div>
-          
-      </div>
-      {{/if}}
-      {{#if twitter }}
-      <div class="item twitter" data-tweet-id="{{ id }}">
-          <div class="message-content">
-            <img class="avatar" src="/images/twitter.png">
-            <p class="timestamp">{{ date }}</p>
-            <p class="message"> {{{message}}} </p>
-          </div>
-      </div>
-      {{/if}}
-    {{/each}}
 
     </div>
   </div>  
