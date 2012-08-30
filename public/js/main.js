@@ -1,3 +1,11 @@
+var Action = new Backbone.Model.extend({})
+
+var Actions = Backbone.Collection.extend({
+  model: Action 
+});
+
+Actions.reset({{ actions }})
+
 $(function () {
   $('.twitter').click(function () {
     var id = $(this).attr('data-tweet-id')
