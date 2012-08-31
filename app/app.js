@@ -8,9 +8,7 @@ var _           = require('underscore')
   , hogan       = require('hogan.js')
   , router      = require('router')
   , route       = router() 
-  , config      = require('../deps/config')
   , moment      = require('moment')
-  , request     = require('request')
   , processor   = require('../deps/post-process')
   , postProcess = new processor.PostProcessor()
   , fifteenMins = 60 * 1000 * 15
@@ -98,12 +96,15 @@ route.get('/', function (req, res) {
   res.end(app.templates['index'].render({ actions: JSON.stringify(app.actions) }))
 })
 
+route.get('/{slug}/', function (req, res) {
+  res.end(app.templates[req.params.slug].render())
+})
+
 // serve files
 route.get('/*', function (req, res) { 
   var file = path.resolve(__dirname, '../public/', req.params.wildcard)
   serveFile(file, req, res)
 })
-
 http.createServer(route).listen(port)
 
 hook.emit('log', {message: 'server started on port ' + port})
