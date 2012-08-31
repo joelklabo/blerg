@@ -1,49 +1,25 @@
 var tako        = require('tako')
-  , fs          = require('fs')
   , _           = require('underscore')
-  , path        = require('path')
-  , request     = require('request')
-  , Hook        = require('hook.io').Hook
-  , moment      = require('moment')
+  , fs          = require('fs')
   , db          = require('../deps/db')
+  , app         = tako()
+  , port        = 8000//process.env.DEV_MODE == 'true' ? 8000 : 80
+  , path        = require('path')
+  , Hook        = require('hook.io').Hook
+  , hogan       = require('hogan.js')
   , config      = require('../deps/config')
+  , moment      = require('moment')
+  , request     = require('request')
   , processor   = require('../deps/post-process')
   , postProcess = new processor.PostProcessor()
-  , port        = 8000//process.env.DEV_MODE == 'true' ? 8000 : 80
   , fifteenMins = 60 * 1000 * 15
-  , app         = tako()
   ;
-
-app.actions = []
 
 // Fill the actions array the first time
 updateActions()
 
-var hook = new Hook({
-  name: 'app'
-})
-
-hook.on('db::update', function (data) {
-  hook.emit('log', {message: 'updating actions'})
-  updateActions()
-})
-
-hook.start()
-
-function renderPosts (finish) {
-  var page = app.page()
-  page.template('action')
-  page.promise('action')(false, {actions: app.actions})
-  page.on('finish', finish)
-  return page
-}
-
-function updateTimes () {
-  hook.emit('log', {message: 'updating times'})
-  app.actions.forEach(function (action) {
-    action.date = moment(action.created_at).from(moment())
-  })
-}
+// Compile the templates and cache them
+compileTemplates()
 
 function updateActions () {
   app.actions = []
@@ -56,28 +32,46 @@ function updateActions () {
   })
 }
 
+function compileTemplates () {
+  var templatesDir = path.resolve(__dirname, '../templates')
+  app.templates = {}
+  fs.readdir(templatesDir, function (err, files) {
+    if (err) throw err
+    if (files) {
+      files.forEach(function (file) {
+        fs.readFile(path.resolve(templatesDir, file), 'utf8', function (err, data) {
+          if (err) throw err
+          app.templates[file] = hogan.compile(data)
+        })
+      }) 
+    }
+  })
+}
+
+function updateTimes () {
+  hook.emit('log', {message: 'updating times'})
+  app.actions.forEach(function (action) {
+    action.date = moment(action.created_at).from(moment())
+  })
+}
+
+var hook = new Hook({
+  name: 'app'
+})
+
+hook.on('db::update', function (data) {
+  hook.emit('log', {message: 'updating actions'})
+  updateActions()
+})
+
+hook.start()
+
 setInterval(function () {
   updateTimes()
 }, fifteenMins)
 
-app.templates.directory(path.resolve(__dirname, '../templates/'))
-
-app.route('/actions.json').json(function (req, res) {
-  db.getAll(function (data) {
-    var json = _.map(data.rows, function (row) {
-      return row.value
-    })
-    res.end(json)
-  })
-})
-
 app.route('/').html(function (req, res) {
-  function finish(data) {
-    db.getAll(function (data) {
-      return postProcess.trans(data)
-    })
-  }
-  req.pipe(renderPosts(finish)).pipe(res)
+  res.end(app.templates['index'].render({ actions: JSON.stringify(app.actions) }))
 })
  
 // serve files

@@ -1,11 +1,3 @@
-var Action = new Backbone.Model.extend({})
-
-var Actions = Backbone.Collection.extend({
-  model: Action 
-});
-
-Actions.reset({{ actions }})
-
 $(function () {
   $('.twitter').click(function () {
     var id = $(this).attr('data-tweet-id')
@@ -29,4 +21,9 @@ $(function () {
   }, function (e) {
     $('.twitter-follow-button').fadeOut();
   });
+
+  Action = new Backbone.Model
+  
+  Actions = new Backbone.Collection
+
 })
