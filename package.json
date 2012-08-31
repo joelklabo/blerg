@@ -18,9 +18,8 @@
     "hook.io": "*",
     "moment": "*",
     "request": "*",
-    "tako": "*",
-    "effortless": "*",
     "underscore": "*",
+    "router": "*",
     "hogan.js": "*",
     "forever-monitor": "~1.0.2"
   },

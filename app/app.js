@@ -1,18 +1,20 @@
-var tako        = require('tako')
-  , _           = require('underscore')
+var _           = require('underscore')
   , fs          = require('fs')
   , db          = require('../deps/db')
-  , app         = tako()
   , port        = 8000//process.env.DEV_MODE == 'true' ? 8000 : 80
   , path        = require('path')
+  , http        = require('http')
   , Hook        = require('hook.io').Hook
   , hogan       = require('hogan.js')
+  , router      = require('router')
+  , route       = router() 
   , config      = require('../deps/config')
   , moment      = require('moment')
   , request     = require('request')
   , processor   = require('../deps/post-process')
   , postProcess = new processor.PostProcessor()
   , fifteenMins = 60 * 1000 * 15
+  , app         = {}
   ;
 
 // Fill the actions array the first time
@@ -25,9 +27,7 @@ function updateActions () {
   app.actions = []
   db.getAll(function (data) {
     postProcess.trans(data).forEach(function (datum){
-      if (app.actions.length < 30) {
-        app.actions.push(datum)
-      }
+      app.actions.push(datum)
     })
   })
 }
@@ -48,6 +48,30 @@ function compileTemplates () {
   })
 }
 
+function serveFile (file, req, res) {
+  var mimeTypes = {
+      "html": "text/html"
+    , "jpeg": "image/jpeg"
+    , "jpg" : "image/jpeg"
+    , "gif" : "image/gif"
+    , "png" : "image/png"
+    , "js"  : "text/javascript"
+    , "css" : "text/css"
+  }
+  fs.exists(file, function (exists) {
+    if (!exists) {
+      console.log("This file does not exist: " + file);
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write('404 Not Found\n');
+      res.end();
+    }
+    var mimeType = mimeTypes[path.extname(file).split(".")[1]];
+    res.writeHead(200, {'Content-Type': mimeType});
+    var fileStream = fs.createReadStream(file);
+    fileStream.pipe(res);
+  });
+}
+
 function updateTimes () {
   hook.emit('log', {message: 'updating times'})
   app.actions.forEach(function (action) {
@@ -56,7 +80,7 @@ function updateTimes () {
 }
 
 var hook = new Hook({
-  name: 'app'
+  name: 'Main'
 })
 
 hook.on('db::update', function (data) {
@@ -70,13 +94,16 @@ setInterval(function () {
   updateTimes()
 }, fifteenMins)
 
-app.route('/').html(function (req, res) {
+route.get('/', function (req, res) {
   res.end(app.templates['index'].render({ actions: JSON.stringify(app.actions) }))
 })
- 
-// serve files
-app.route('/*').files(path.resolve(__dirname, '../public/'))
 
-app.httpServer.listen(port)
+// serve files
+route.get('/*', function (req, res) { 
+  var file = path.resolve(__dirname, '../public/', req.params.wildcard)
+  serveFile(file, req, res)
+})
+
+http.createServer(route).listen(port)
 
 hook.emit('log', {message: 'server started on port ' + port})
