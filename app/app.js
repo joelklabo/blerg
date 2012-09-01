@@ -5,7 +5,6 @@ var _           = require('underscore')
   , path        = require('path')
   , http        = require('http')
   , Hook        = require('hook.io').Hook
-  , hogan       = require('hogan.js')
   , router      = require('router')
   , route       = router() 
   , moment      = require('moment')
@@ -39,7 +38,7 @@ function compileTemplates () {
       files.forEach(function (file) {
         fs.readFile(path.resolve(templatesDir, file), 'utf8', function (err, data) {
           if (err) throw err
-          app.templates[file] = hogan.compile(data)
+          app.templates[file] = _.template(data)
         })
       }) 
     }
@@ -93,11 +92,12 @@ setInterval(function () {
 }, fifteenMins)
 
 route.get('/', function (req, res) {
-  res.end(app.templates['index'].render({ actions: JSON.stringify(app.actions) }))
+  res.end(app.templates['index']({ actions: JSON.stringify(app.actions) }))
 })
 
 route.get('/{slug}/', function (req, res) {
-  res.end(app.templates[req.params.slug].render())
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end(app.templates[req.params.slug]())
 })
 
 // serve files

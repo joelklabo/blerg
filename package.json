@@ -20,7 +20,6 @@
     "request": "*",
     "underscore": "*",
     "router": "*",
-    "hogan.js": "*",
     "forever-monitor": "~1.0.2"
   },
   "engine": {
