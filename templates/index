@@ -15,7 +15,7 @@
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   <script>
   $(function () {
-    Actions.reset(<%= actions %>)
+    actions.reset(<%= actions %>)
   })
   </script>
 
@@ -28,6 +28,8 @@
       <a href="https://twitter.com/joelklabo" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @joelklabo</a>
     </div>
     <div class="content">
+      <ul class="action-list">
+      </ul>
     </div>
   </div>  
   
